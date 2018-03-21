@@ -4,10 +4,10 @@ from bugzilla.bug import Bug
 BZ_URL = 'bugzilla.redhat.com'
 
 OSP_TRACKERS = {
-    '1548354':'OSP12',
-    '1548353':'OSP13',
-    '1553640':'OSP14',}
-
+    '1548354': 'OSP12',
+    '1548353': 'OSP13',
+    '1553640': 'OSP14',
+    }
 
 bzapi = Bugzilla(BZ_URL)
 

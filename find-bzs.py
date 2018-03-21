@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 from bugzilla import Bugzilla
 from bugzilla.bug import Bug
+
+
 BZ_URL = 'bugzilla.redhat.com'
 
 OSP_TRACKERS = {

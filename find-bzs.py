@@ -3,8 +3,10 @@ from bugzilla import Bugzilla
 from bugzilla.bug import Bug
 BZ_URL = 'bugzilla.redhat.com'
 
-OSP_TRACKER = 1548353  # OSP 13 tracker
-# OSP_TRACKER = 1553640  # OSP 14 tracker
+OSP_TRACKERS = {
+    '1548354':'OSP12',
+    '1548353':'OSP13',
+    '1553640':'OSP14',}
 
 
 bzapi = Bugzilla(BZ_URL)
@@ -23,13 +25,13 @@ def search(payload):
     return bugs
 
 
-def query_params():
+def query_params(tracker):
     """ Return a dict of basic Bugzilla search parameters. """
     params = {
         'include_fields': ['id', 'summary', 'status'],
         'f1': 'blocked',
         'o1': 'equals',
-        'v1': OSP_TRACKER,
+        'v1': tracker,
         'f2': 'bug_status',
         'o2': 'anywords',
         'v2': 'NEW ASSIGNED POST MODIFIED ON_DEV ON_QA'
@@ -53,12 +55,15 @@ def sort_by_status(bug):
 
 
 if __name__ == '__main__':
-    payload = query_params()
-    bugs = search(payload)
-    print('Found %d bugs blocking %s' % (len(bugs), OSP_TRACKER))
+    for tracker in OSP_TRACKERS.keys():
+        payload = query_params(tracker)
+        bugs = search(payload)
+        print('Found %d bugs blocking %s / %s' % (len(bugs),
+                                                  tracker,
+                                                  OSP_TRACKERS[tracker]))
 
-    sorted_bugs = sorted(bugs, key=sort_by_status)
+        sorted_bugs = sorted(bugs, key=sort_by_status)
 
-    for bug in sorted_bugs:
-        print('https://bugzilla.redhat.com/%d - %s - %s'
-              % (bug.id, bug.status, bug.summary))
+        for bug in sorted_bugs:
+            print('https://bugzilla.redhat.com/%d - %s - %s'
+                  % (bug.id, bug.status, bug.summary))

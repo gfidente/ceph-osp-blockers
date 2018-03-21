@@ -60,4 +60,5 @@ if __name__ == '__main__':
     sorted_bugs = sorted(bugs, key=sort_by_status)
 
     for bug in sorted_bugs:
-        print('https://bugzilla.redhat.com/%d - %s - %s' % (bug.id, bug.status, bug.summary))
+        print('https://bugzilla.redhat.com/%d - %s - %s'
+              % (bug.id, bug.status, bug.summary))

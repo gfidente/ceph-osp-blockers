@@ -2,7 +2,7 @@ Report on Ceph bugs that block OSP's releases
 
 Prerequisites:
 
-* Install python-bugzilla: ``yum install python-bugzilla``
+* Install python packages: ``yum install python-bugzilla PyYAML``
 * Log into Bugzilla on the command-line: ``bugzilla login``
 
 Running:

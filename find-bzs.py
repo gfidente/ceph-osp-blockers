@@ -55,12 +55,10 @@ def sort_by_status(bug):
 
 
 if __name__ == '__main__':
-    for tracker in OSP_TRACKERS.keys():
+    for tracker, release in OSP_TRACKERS.items():
         payload = query_params(tracker)
         bugs = search(payload)
-        print('Found %d bugs blocking %s / %s' % (len(bugs),
-                                                  tracker,
-                                                  OSP_TRACKERS[tracker]))
+        print('Found %d bugs blocking %s' % (len(bugs), release))
 
         sorted_bugs = sorted(bugs, key=sort_by_status)
 
